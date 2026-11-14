@@ -21,3 +21,31 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
+
+export function getParam(param) {
+  return new URLSearchParams(window.location.search).get(param);
+}
+
+export function renderWithTemplate(
+  template,
+  parentElement,
+  data,
+  position = "afterbegin",
+  clear = false
+) {
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+
+  parentElement.insertAdjacentHTML(
+    position,
+    data.map((item) => template(item)).join("")
+  );
+}
+
+export function updateCartCount() {
+  const cartCount = qs("#cart-count");
+  if (cartCount) {
+    cartCount.textContent = getLocalStorage("so-cart")?.length ?? 0;
+  }
+}
