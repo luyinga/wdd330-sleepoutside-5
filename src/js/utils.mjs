@@ -15,41 +15,29 @@ export function setLocalStorage(key, data) {
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
-  qs(selector).addEventListener("touchend", (event) => {
+  qs(selector).addEventListener('touchend', (event) => {
     event.preventDefault();
     callback();
   });
-  qs(selector).addEventListener("click", callback);
+  qs(selector).addEventListener('click', callback);
 }
 
+// Get a parameter from the URL
 export function getParam(param) {
-  return new URLSearchParams(window.location.search).get(param);
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  return urlParams.get(param);
 }
 
-export function renderWithTemplate(
-  template,
-  parentElement,
-  data,
-  position = "afterbegin",
-  clear = false
-) {
-  if (clear) {
-    parentElement.innerHTML = "";
-  }
 
-  parentElement.insertAdjacentHTML(
-    position,
-    data.map((item) => template(item)).join("")
-  );
-}
+// Function to render templates
+export function renderWithTemplate(template, parentElement, data, callback){
+  parentElement.innerHTML = template;
 
-export function updateCartCount() {
-  const cartCount = qs("#cart-count");
-  if (cartCount) {
-    cartCount.textContent = getLocalStorage("so-cart")?.length ?? 0;
+  if (callback) {
+    callback(data);
   }
 }
-
 export function renderListWithTemplate(template, parentElement, list, position = 'afterbegin', clear = false) {
   const htmlStrings = list.map(template);
   // if clear is true we need to clear out the contents of the parent.
@@ -74,10 +62,10 @@ export async function loadHeaderFooter(){
   renderWithTemplate(footerTemplate, footerElement);
 }
 
-//export function updateCartCount() {
- // const cartItems = getLocalStorage('so-cart') || [];
- // const cartCountElement = document.querySelector('#cart-count');
- // if (cartCountElement) {
-  //  cartCountElement.textContent = cartItems.length;
-  //}
-//}
+export function updateCartCount() {
+  const cartItems = getLocalStorage('so-cart') || [];
+  const cartCountElement = document.querySelector('#cart-count');
+  if (cartCountElement) {
+    cartCountElement.textContent = cartItems.length;
+  }
+}
