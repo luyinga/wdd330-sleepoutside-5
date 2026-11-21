@@ -33,6 +33,8 @@ img {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
   padding: 0.5rem;
 }
 
@@ -58,6 +60,40 @@ p {
 .logo a {
   text-decoration: none;
   color: var(--font-body);
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  flex: 1 1 300px;
+  max-width: 520px;
+  gap: 0.4rem;
+}
+
+.search-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.55em;
+  font-size: 0.9em;
+}
+
+.search-form button {
+  display: inline-block;
+  margin: 0;
+  padding: 0.55em 0.9em;
+  font-size: 0.9em;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .hero {
@@ -305,6 +341,18 @@ button {
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  header {
+    flex-wrap: wrap;
+  }
+
+  .search-form {
+    order: 3;
+    flex-basis: 100%;
+    max-width: none;
   }
 }
 

@@ -20,8 +20,10 @@ export default class ProductList {
     this.list = [];
   }
 
-  async init() {
-    this.list = await this.dataSource.getData(this.category);
+  async init(searchTerm) {
+    this.list = searchTerm
+      ? await this.dataSource.searchProducts(searchTerm)
+      : await this.dataSource.getData(this.category);
     this.renderList(this.list);
 
     const sortSelect = document.querySelector('#product-sort');
