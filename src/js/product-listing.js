@@ -1,13 +1,13 @@
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import { getParam, updateCartCount, loadHeaderFooter } from "./utils.mjs";
 
 const searchQuery = getParam("search");
 const searchTerm = searchQuery ? searchQuery.trim() : "";
 const category = searchTerm || getParam("category");
-const productData = new ProductData();
+const dataSource = new ExternalServices();
 const htmlElement = document.querySelector(".product-list");
-const productList = new ProductList(category, productData, htmlElement);
+const productList = new ProductList(category, dataSource, htmlElement);
 
 (async () => {
   await loadHeaderFooter();
