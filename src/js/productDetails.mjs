@@ -1,4 +1,4 @@
-import { updateCartCount } from './utils.mjs';
+import { alertMessage, updateCartCount } from './utils.mjs';
 
 
 export default class ProductDetails {
@@ -26,6 +26,7 @@ export default class ProductDetails {
 
     addToCart() {
         this.addProductToCart();
+        alertMessage(`${this.product.Name} successfully added to your cart.`, false);
     }
 
     renderProductDetails() {
